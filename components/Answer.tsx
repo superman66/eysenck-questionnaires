@@ -1,6 +1,6 @@
 import { Radio, RadioGroup } from "rsuite";
 import type { RadioGroupProps } from "rsuite";
-import { AnswerType } from "../types";
+import { AnswerType } from "../types/index";
 
 const Answer = (props: RadioGroupProps<string | number>) => {
   return (

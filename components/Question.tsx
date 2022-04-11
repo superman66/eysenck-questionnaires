@@ -1,4 +1,4 @@
-import { AnswerType } from "../types";
+import { AnswerType } from "../types/index";
 import Answer from "./Answer";
 
 interface QuestionProps {

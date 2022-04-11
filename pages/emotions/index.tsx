@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Question from "../../components/Question";
-import { AnswerType, EmotionsQuestionnaire } from "../../types";
+import {
+  EmotionsQuestionnaireFormData,
+  AnswerType,
+  EmotionsQuestionnaire,
+} from "../../types";
 import { emotionsQuestionnaireData } from "../api/emotions-data";
-import { EmotionsQuestionnaireFormData } from "./types";
 import { useImmer } from "use-immer";
 
 const EmotionsQuestionnaire: NextPage = () => {

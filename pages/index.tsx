@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -26,19 +27,23 @@ const Home: NextPage = () => {
         </p>
 
         <div className={styles.grid}>
-          <a href="/personality" className={styles.card}>
-            <h2>艾森克人格问卷(成人版) &rarr;</h2>
-            <p>
-              情绪稳定性测验可以被用于症断是否存在自卑、抑郁、焦虑、强迫症、依赖性...
-            </p>
-          </a>
+          <Link href="/personality" passHref>
+            <div className={styles.card}>
+              <h2>艾森克人格问卷(成人版) &rarr;</h2>
+              <p>
+                情绪稳定性测验可以被用于症断是否存在自卑、抑郁、焦虑、强迫症、依赖性...
+              </p>
+            </div>
+          </Link>
 
-          <a href="/emotions" className={styles.card}>
-            <h2>艾森克情绪稳定性测验 &rarr;</h2>
-            <p>
-              艾森克人格问卷是英国伦敦大学心理系和精神病研究所艾森克教授编制的...
-            </p>
-          </a>
+          <Link href="/emotions" passHref>
+            <div className={styles.card}>
+              <h2>艾森克情绪稳定性测验 &rarr;</h2>
+              <p>
+                艾森克人格问卷是英国伦敦大学心理系和精神病研究所艾森克教授编制的...
+              </p>
+            </div>
+          </Link>
         </div>
       </main>
 

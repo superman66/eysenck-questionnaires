@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'rsuite/dist/rsuite.min.css';
+
 html,
 body {
   padding: 0;

@@ -5,7 +5,7 @@ interface QuestionProps {
   index: number;
   question: string;
   value?: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | number) => void;
 }
 
 const Question = ({ index, question, value, onChange }: QuestionProps) => {

@@ -10,7 +10,7 @@ interface QuestionProps {
 
 const Question = ({ index, question, value, onChange }: QuestionProps) => {
   return (
-    <div>
+    <div className="mb-3">
       <div>
         {index + 1}. {question}
       </div>

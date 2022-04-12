@@ -20,8 +20,8 @@ export enum EmotionType {
   Anxiety = "anxiety",
   /** 强迫症 */
   ObsessiveCompulsiveDisorder = "obsessive-compulsive-disorder",
-  /** 依赖性 */
-  Dependency = "dependency",
+  /** 自主性 */
+  Autonomy = "autonomy",
   /** 疑心病 */
   Suspiciousness = "suspiciousness",
   /** 负罪感 */

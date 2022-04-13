@@ -5,13 +5,19 @@ import {
   EmotionsQuestionnaireFormData,
   AnswerType,
   EmotionsQuestionnaire,
+  QuestionnaireResult,
 } from "../../types";
 import { emotionsQuestionnaireData } from "../api/emotions-data";
 import { useImmer } from "use-immer";
 import { Button } from "rsuite";
+import { useState } from "react";
+import { calculateQuestionnaireResult } from "../../utils/calculateQuestionnaireResult";
+import QuestionnaireReport from "../../components/QuestionnaireReport";
 
 const EmotionsQuestionnaire: NextPage = () => {
+  // 问卷表单数据
   const [formData, setFormData] = useImmer<EmotionsQuestionnaireFormData>({});
+  const [result, setResult] = useState<QuestionnaireResult | null>(null);
 
   const handleChange = (
     value: AnswerType,
@@ -28,7 +34,11 @@ const EmotionsQuestionnaire: NextPage = () => {
     });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    setResult(calculateQuestionnaireResult(formData));
+  };
+
+  console.log(result);
 
   return (
     <div>
@@ -38,34 +48,41 @@ const EmotionsQuestionnaire: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto p-10 text-base">
-        <article>
-          <h1 className="text-lg text-center">艾克森情绪稳定性测评</h1>
-          <div className="my-5">
-            <p>
-              艾克森是英国伦敦大学心理学教授，是当代最著名的心理学家之一，编制过多种心理测评。情绪稳定性测评可以被用于诊断是否存在自卑、抑郁、焦虑、强迫症、依赖性、疑心病观念和负罪感。
-            </p>
-            <p>
-              下面给出210道题，请你逐一在答案纸上回答。你可以在“是（Y）”、“否（N）”和“不好说（？）”三个答案中选择一个，用铅笔圈出你的选择。你尽量选择“是”和“否”。不要过多地思考每个题目的细微意义，最好根据自己的第一感受来回答。
-            </p>
-          </div>
-        </article>
+        {!result && (
+          <div>
+            <article>
+              <h1 className="text-lg text-center">艾克森情绪稳定性测评</h1>
+              <div className="my-5">
+                <p>
+                  艾克森是英国伦敦大学心理学教授，是当代最著名的心理学家之一，编制过多种心理测评。情绪稳定性测评可以被用于诊断是否存在自卑、抑郁、焦虑、强迫症、依赖性、疑心病观念和负罪感。
+                </p>
+                <p>
+                  下面给出210道题，请你逐一在答案纸上回答。你可以在“是（Y）”、“否（N）”和“不好说（？）”三个答案中选择一个，用铅笔圈出你的选择。你尽量选择“是”和“否”。不要过多地思考每个题目的细微意义，最好根据自己的第一感受来回答。
+                </p>
+              </div>
+            </article>
 
-        <div>
-          {emotionsQuestionnaireData.map((item, index) => {
-            const { id, question } = item;
-            const value = formData[id]?.value;
-            return (
-              <Question
-                index={index}
-                key={id}
-                question={question}
-                value={value}
-                onChange={(value) => handleChange(value as AnswerType, item)}
-              />
-            );
-          })}
-          <Button onClick={handleSubmit}>提交查看结果</Button>
-        </div>
+            <div>
+              {emotionsQuestionnaireData.map((item, index) => {
+                const { id, question } = item;
+                const value = formData[id]?.value;
+                return (
+                  <Question
+                    index={index}
+                    key={id}
+                    question={question}
+                    value={value}
+                    onChange={(value) =>
+                      handleChange(value as AnswerType, item)
+                    }
+                  />
+                );
+              })}
+              <Button onClick={handleSubmit}>提交查看结果</Button>
+            </div>
+          </div>
+        )}
+        {result && <QuestionnaireReport result={result} />}
       </main>
     </div>
   );

@@ -13,19 +13,19 @@ export enum AnswerType {
  */
 export enum EmotionType {
   /** 自卑 */
-  Inferiority = "inferiority",
+  Inferiority = "Inferiority",
   /** 抑郁性 */
-  Depressibility = "depressibility",
+  Depressibility = "Depressibility",
   /** 焦虑 */
-  Anxiety = "anxiety",
+  Anxiety = "Anxiety",
   /** 强迫症 */
-  ObsessiveCompulsiveDisorder = "obsessive-compulsive-disorder",
+  ObsessiveCompulsiveDisorder = "ObsessiveCompulsiveDisorder",
   /** 自主性 */
-  Autonomy = "autonomy",
+  Autonomy = "Autonomy",
   /** 疑心病 */
-  Suspiciousness = "suspiciousness",
+  Suspiciousness = "Suspiciousness",
   /** 负罪感 */
-  Guilty = "guilty",
+  Guilty = "Guilty",
 }
 
 export interface EmotionsQuestionnaire {
@@ -37,11 +37,16 @@ export interface EmotionsQuestionnaire {
   type: EmotionType;
 }
 
-export interface EmotionsQuestionnaireFormData {
-  [key: string]: {
-    id: number;
-    value: AnswerType;
-    type: EmotionType;
-    score: number;
-  };
+export interface EmotionsQuestionnaireFormDataItem {
+  id: number;
+  value: AnswerType;
+  type: EmotionType;
+  score: number;
 }
+export interface EmotionsQuestionnaireFormData {
+  [key: string]: EmotionsQuestionnaireFormDataItem;
+}
+
+export type QuestionnaireResult = {
+  [key in string]: number;
+};

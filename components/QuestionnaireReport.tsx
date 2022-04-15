@@ -1,6 +1,8 @@
 import React from "react";
+import { FlexboxGrid, List } from "rsuite";
 import { emotionTypeData } from "../pages/api/emotion-type";
-import { QuestionnaireResult } from "../types";
+import { EmotionType, QuestionnaireResult } from "../types";
+import Result from "./Result";
 
 interface QuestionnaireReportProps {
   result: QuestionnaireResult;
@@ -13,30 +15,44 @@ export default function QuestionnaireReport({
   result,
 }: QuestionnaireReportProps) {
   return (
-    <div className="container mx-auto p-10 text-base">
-      <h1>情绪评测表结果分析报告</h1>
+    <div className="">
+      <h1 className="text-lg text-center">情绪评测表结果分析报告</h1>
 
       <div className="">
         <h2 className="text-left">维度说明</h2>
-        <p>
-          情绪评测表210道题中包含7个分量表，每30道题一个量表，分别从自卑感、抑郁性、焦虑、强迫症、依赖型、疑心病观念和负罪感7个方面评价一个人的心理健康状态。
+        <p className="mb-[20px]">
+          情绪评测表210道题中包含7个分量表，每30道题一个量表，分别从
+          <span className="font-bold">
+            自卑感、抑郁性、焦虑、强迫症、依赖型、疑心病观念和负罪感
+          </span>
+          7个方面评价一个人的心理健康状态。
         </p>
-        <table>
-          {emotionTypeData.map(({ type, high, low }) => {
+        <List className="" bordered>
+          {emotionTypeData.map(({ name, type, high, low }) => {
             return (
-              <tr key={type}>
-                <td>
-                  <div>{type}</div>
-                  <div>分数：{result[type]}</div>
-                </td>
-                <td>
-                  <div>高分者：{high}</div>
-                  <div className="">低分者：{low}</div>
-                </td>
-              </tr>
+              <List.Item key={type}>
+                <FlexboxGrid>
+                  <FlexboxGrid.Item colspan={6}>
+                    <div>{name}</div>
+                    <div className="text-blue-600">分数：{result[type]}</div>
+                  </FlexboxGrid.Item>
+                  <FlexboxGrid.Item colspan={18}>
+                    <div className="mb-[5px]">
+                      <span className="font-bold">高分者：</span>
+                      {high}
+                    </div>
+                    <div className="">
+                      <span className="font-bold">低分者：</span>
+                      {low}
+                    </div>
+                  </FlexboxGrid.Item>
+                </FlexboxGrid>
+              </List.Item>
             );
           })}
-        </table>
+        </List>
+
+        <Result result={result} />
       </div>
     </div>
   );

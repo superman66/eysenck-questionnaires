@@ -20,7 +20,6 @@ export function calculateQuestionnaireResult(
   formData: EmotionsQuestionnaireFormData
 ): QuestionnaireResult {
   const data = Object.values(formData);
-  console.log(data);
   let scoreMap: QuestionnaireResult = {};
   for (let type in EmotionType) {
     scoreMap[type] = getEmotionTypeScore(data, type as EmotionType);

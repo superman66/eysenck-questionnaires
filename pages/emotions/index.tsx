@@ -35,10 +35,9 @@ const EmotionsQuestionnaire: NextPage = () => {
   };
 
   const handleSubmit = () => {
+    window.scrollTo(0, 0);
     setResult(calculateQuestionnaireResult(formData));
   };
-
-  console.log(result);
 
   return (
     <div>
